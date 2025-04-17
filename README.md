@@ -1,51 +1,69 @@
-# NicoWell アプリケーション
+# NicoWell - パーソナライズされたウェルネスアドバイスアプリ
 
-パーソナライズされたウェルネスアドバイスを提供するインタラクティブなウェブアプリケーション。
-すべての機能が日本語で提供されています。
+NicoWellは日本語で利用できるパーソナライズされたウェルネスアドバイスを提供するインタラクティブなウェブアプリケーションです。ユーザーの生活習慣やウェルネス目標に基づいて、睡眠、栄養、ストレス管理、運動などの分野で実践的なアドバイスを提供します。
 
 ## 機能
 
-- ユーザープロフィールに基づいたパーソナライズされたウェルネス分析
-- OpenAI APIを使用したチャットボット機能
-- GSAPによるモダンなアニメーション
-- PostgreSQLデータベースによるデータ保存
+- 完全な日本語インターフェース
+- ユーザーの生活習慣や健康目標に基づくパーソナライズされた分析
+- GSAPを使用したモダンなアニメーションとインタラクション
+- AIチャットボットによる詳細なアドバイスと質問対応
+- レスポンシブなデザインで様々なデバイスに対応
+- ユーザーフィードバックの収集と保存
 
-## 環境変数
+## 技術スタック
 
-Amplifyにデプロイする際には、以下の環境変数を設定してください：
+- フロントエンド: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, GSAP
+- バックエンド: Node.js, Express
+- データベース: PostgreSQL, Drizzle ORM
+- AI: OpenAI API (GPT-4o)
+- デプロイ: AWS Amplify
 
-### 必須の環境変数
+## 開発環境のセットアップ
 
-- `OPENAI_API_KEY`: OpenAI APIキー（GPT-4oモデルを使用可能なもの）
-- `DATABASE_URL`: PostgreSQLデータベースの接続URL
+1. リポジトリのクローン:
+```
+git clone https://github.com/yourusername/nicowell.git
+cd nicowell
+```
 
-### データベース関連の環境変数
-
-以下は`DATABASE_URL`から自動的に分解されますが、明示的に設定することもできます：
-
-- `PGHOST`: PostgreSQLホスト名
-- `PGPORT`: PostgreSQLポート番号
-- `PGUSER`: PostgreSQLユーザー名
-- `PGPASSWORD`: PostgreSQLパスワード
-- `PGDATABASE`: PostgreSQLデータベース名
-
-## デプロイ手順
-
-1. GitHubリポジトリにコードをプッシュ
-2. AWS Amplifyコンソールでリポジトリを接続
-3. ビルド設定は`amplify.yml`を使用
-4. 環境変数を設定
-5. デプロイを開始
-
-## 開発環境の準備
-
-```bash
-# 依存関係のインストール
+2. 依存関係のインストール:
+```
 npm install
+```
 
-# 開発サーバーの起動
-npm run dev
+3. 環境変数の設定:
+`.env.example`ファイルを`.env`としてコピーし、必要な環境変数を設定します:
+```
+cp .env.example .env
+```
+そして`.env`ファイルを編集して、以下の変数を設定してください:
+- `DATABASE_URL`: PostgreSQLデータベースの接続URL
+- `OPENAI_API_KEY`: OpenAI APIキー
+- `PORT`: アプリケーションが実行されるポート（デフォルトは5000）
 
-# データベースマイグレーションの実行
+4. データベーススキーマの適用:
+```
 npm run db:push
 ```
+
+5. 開発サーバーの起動:
+```
+npm run dev
+```
+
+## デプロイ (AWS Amplify)
+
+1. AWS Amplifyコンソールで新しいアプリケーションを作成
+2. GitHubリポジトリを接続
+3. ビルド設定として、このリポジトリのamplify.ymlファイルを使用
+4. 必要な環境変数を設定（DATABASE_URL, OPENAI_API_KEY）
+5. デプロイを開始
+
+## ライセンス
+
+MIT
+
+## 作者
+
+NicoWell Team
