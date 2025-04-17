@@ -106,8 +106,23 @@ ${analysisResultJSON}
         return res.status(400).json({ message: "満足度と実行可能性の評価が必要です" });
       }
 
-      // Store in memory only for this demo, no database persistence
-      console.log("Survey submission:", { satisfaction, feasibility, email, userProfile, analysisResults });
+      // データベースに保存
+      const surveyData = {
+        satisfaction,
+        feasibility,
+        email: email || null,
+        profileData: userProfile ? JSON.stringify(userProfile) : null,
+        analysisData: analysisResults ? JSON.stringify(analysisResults) : null,
+      };
+      
+      await storage.createSurveyResponse(surveyData);
+      
+      // メールアドレスが提供された場合はユーザーも作成
+      if (email) {
+        await storage.createUser({ email });
+      }
+      
+      console.log("Survey submission saved to database:", { satisfaction, feasibility, email });
       
       res.json({ message: "フィードバックを受け取りました。ありがとうございます！" });
     } catch (error) {
