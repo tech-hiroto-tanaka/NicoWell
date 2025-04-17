@@ -1,0 +1,7 @@
+{
+  "name": "survey-function",
+  "version": "1.0.0",
+  "description": "NicoWell survey Lambda function",
+  "main": "index.js",
+  "dependencies": {}
+}

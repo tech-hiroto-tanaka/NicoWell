@@ -1,0 +1,9 @@
+{
+  "name": "chat-function",
+  "version": "1.0.0",
+  "description": "NicoWell chat Lambda function",
+  "main": "index.js",
+  "dependencies": {
+    "openai": "^4.24.1"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "analysis-function",
+  "version": "1.0.0",
+  "description": "NicoWell analysis Lambda function",
+  "main": "index.js",
+  "dependencies": {
+    "openai": "^4.24.1"
+  }
+}
