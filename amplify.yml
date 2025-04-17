@@ -9,7 +9,7 @@ frontend:
         - npm run build
         - bash ./amplify-postbuild.sh
   artifacts:
-    baseDirectory: ./dist
+    baseDirectory: ./dist/public
     files:
       - '**/*'
   cache:

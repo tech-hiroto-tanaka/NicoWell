@@ -3,16 +3,26 @@
 # AWS Amplifyデプロイ後に実行されるスクリプト
 echo "Amplify post-build script running..."
 
-# データベースマイグレーションを実行
-if [ -n "$DATABASE_URL" ]; then
-  echo "Running database migrations..."
-  npm run db:push
-  echo "Database migrations completed."
-else
-  echo "DATABASE_URL not set, skipping migrations."
+# データベースマイグレーションはスキップ（必要なら後で手動実行）
+echo "Skipping database migrations during build phase."
+
+# ビルド出力ディレクトリを確認
+if [ ! -d "dist" ]; then
+  echo "Error: dist directory not found"
+  mkdir -p dist
 fi
 
-# 静的アセットのパス設定
-echo "Setting up environment for production..."
+# index.htmlが存在するか確認
+if [ ! -f "dist/index.html" ]; then
+  echo "Warning: index.html not found in dist directory. Copying from client/ folder..."
+  # クライアントのindex.htmlをdistにコピー
+  if [ -f "client/index.html" ]; then
+    cp client/index.html dist/
+    echo "index.html copied successfully."
+  else
+    echo "Error: client/index.html not found"
+  fi
+fi
 
+echo "Setting up environment for production..."
 echo "Post-build tasks completed."

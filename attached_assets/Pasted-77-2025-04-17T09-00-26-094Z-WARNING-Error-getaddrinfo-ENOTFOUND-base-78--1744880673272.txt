@@ -1,0 +1,139 @@
+77
+
+2025-04-17T09:00:26.094Z [WARNING]: Error: getaddrinfo ENOTFOUND base
+
+78
+
+                                    at /codebuild/output/src444443356/src/NicoWell/node_modules/pg-pool/index.js:45:11
+
+79
+
+                                    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+80
+
+                                    at async Object.query (/codebuild/output/src444443356/src/NicoWell/node_modules/drizzle-kit/bin.cjs:66575:26)
+
+81
+
+                                    at async fromDatabase2 (/codebuild/output/src444443356/src/NicoWell/node_modules/drizzle-kit/bin.cjs:18700:25) {
+
+82
+
+                                    errno: -3008,
+
+83
+
+                                    code: 'ENOTFOUND',
+
+84
+
+                                    syscall: 'getaddrinfo',
+
+85
+
+                                    hostname: 'base'
+
+86
+
+                                    }
+
+87
+
+2025-04-17T09:00:26.109Z [INFO]: Database migrations completed.
+
+88
+
+                                 Setting up environment for production...
+
+89
+
+2025-04-17T09:00:26.109Z [INFO]: Post-build tasks completed.
+
+90
+
+                                 # Completed phase: build
+
+91
+
+                                 ## Completed Frontend Build
+
+92
+
+2025-04-17T09:00:26.123Z [INFO]: ## Build completed successfully
+
+93
+
+2025-04-17T09:00:26.123Z [INFO]: # Starting caching...
+
+94
+
+2025-04-17T09:00:26.128Z [INFO]: # Creating cache artifact...
+
+95
+
+2025-04-17T09:00:31.926Z [INFO]: # Created cache artifact
+
+96
+
+2025-04-17T09:00:32.022Z [INFO]: # Uploading cache artifact...
+
+97
+
+2025-04-17T09:00:35.549Z [INFO]: # Uploaded cache artifact
+
+98
+
+2025-04-17T09:00:35.634Z [INFO]: # Caching completed
+
+99
+
+2025-04-17T09:00:35.637Z [INFO]: Found customHeaders section in amplify.yml, applying custom headers...
+
+100
+
+2025-04-17T09:00:35.637Z [WARNING]: [DEPRECATION WARNING] using amplify.yml to modify custom headers is being deprecated.
+
+101
+
+2025-04-17T09:00:35.637Z [WARNING]: Going forward, in order to configure your custom headers via deploy, please use customHttp.yml instead.
+
+102
+
+2025-04-17T09:00:35.637Z [WARNING]: Learn more: https://docs.aws.amazon.com/amplify/latest/userguide/custom-headers.html
+
+103
+
+2025-04-17T09:00:35.637Z [INFO]: # Found custom headers config file.
+
+104
+
+2025-04-17T09:00:35.754Z [WARNING]: !! No index.html detected in deploy folder: /codebuild/output/src444443356/src/NicoWell/dist
+
+105
+
+2025-04-17T09:00:35.755Z [INFO]: # Starting build artifact upload process...
+
+106
+
+2025-04-17T09:00:35.793Z [INFO]: # Uploading build artifact '__artifacts.zip'...
+
+107
+
+2025-04-17T09:00:35.980Z [INFO]: # Build artifact upload completed
+
+108
+
+2025-04-17T09:00:35.980Z [INFO]: # Starting environment caching...
+
+109
+
+2025-04-17T09:00:35.981Z [INFO]: # Uploading environment cache artifact...
+
+110
+
+2025-04-17T09:00:36.103Z [INFO]: # Uploaded environment cache artifact
+
+111
+
+2025-04-17T09:00:36.103Z [INFO]: # Environment caching completed
