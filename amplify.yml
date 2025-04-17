@@ -1,21 +1,19 @@
 version: 1
-backend:
-  phases:
-    preBuild:
-      commands:
-        - nvm use 20.9.0 || nvm install 20.9.0
-        - npm install
-    build:
-      commands:
-        - echo "Installing Amplify CLI..."
-        - npm install -g ampx
-        - npm install -g @aws-amplify/backend
-        - echo "Deploying backend resources..."
-        - bash ./amplify/build-backend.sh
-        - echo "Amplify backend deployment status:"
-        - export AMPLIFY_APP_ID=dsqkbl4wlhcb2
-        - export AMPLIFY_BRANCH=main
-        - npx ampx pipeline-deploy --app-id $AMPLIFY_APP_ID --branch $AMPLIFY_BRANCH
+# backend部分をコメントアウトしてフロントエンドのみデプロイ
+# backend:
+#  phases:
+#    preBuild:
+#      commands:
+#        - nvm use 20.9.0 || nvm install 20.9.0
+#        - npm install
+#    build:
+#      commands:
+#        - echo "Installing Amplify CLI..."
+#        - npm install -g ampx
+#        - npm install -g @aws-amplify/backend
+#        - echo "Deploying backend resources..."
+#        - bash ./amplify/build-backend.sh
+#        - echo "Skipping Amplify backend deployment due to permission issues"
 frontend:
   phases:
     preBuild:
