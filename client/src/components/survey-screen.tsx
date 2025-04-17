@@ -115,7 +115,7 @@ export default function SurveyScreen() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border-2 border-input rounded-lg p-3 focus:outline-none focus:border-primary" 
           />
-          <p className="text-xs text-muted-foreground mt-2">※メールアドレスは任意です。入力いただくと今後のサービス情報をお届けします。</p>
+          <p className="text-xs text-muted-foreground mt-2">※入力いただくとより詳細な「あなただけの健康プラン」をPDFファイルでお届けします。</p>
         </div>
       </div>
       
