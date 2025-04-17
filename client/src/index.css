@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 20%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+    
+    --primary: 195 58% 76%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 8 76% 89%;
+    --secondary-foreground: 0 0% 20%;
+    
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 46%;
+    
+    --accent: 150 30% 75%;
+    --accent-foreground: 0 0% 20%;
+    
+    --destructive: 0 84% 69%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 195 58% 76%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+.font-rounded {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.chat-bubble {
+  position: relative;
+  border-radius: 18px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  max-width: 80%;
+}
+
+.user-bubble {
+  background-color: hsl(var(--primary));
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  color: white;
+}
+
+.assistant-bubble {
+  background-color: hsl(var(--muted));
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.typing-animation::after {
+  content: '...';
+  animation: ellipsis 1.5s infinite;
+}
+
+@keyframes ellipsis {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: '.'; }
+}
