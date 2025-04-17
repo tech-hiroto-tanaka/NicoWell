@@ -15,7 +15,7 @@ backend:
         - echo "Amplify backend deployment status:"
         - export AMPLIFY_APP_ID=dsqkbl4wlhcb2
         - export AMPLIFY_BRANCH=main
-        - npx ampx pipeline-deploy --yes --app-id $AMPLIFY_APP_ID --branch $AMPLIFY_BRANCH
+        - npx ampx pipeline-deploy --app-id $AMPLIFY_APP_ID --branch $AMPLIFY_BRANCH
 frontend:
   phases:
     preBuild:
