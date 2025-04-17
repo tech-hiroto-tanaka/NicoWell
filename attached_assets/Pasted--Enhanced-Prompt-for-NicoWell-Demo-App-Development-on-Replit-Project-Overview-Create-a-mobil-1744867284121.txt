@@ -1,0 +1,289 @@
+# Enhanced Prompt for NicoWell Demo App Development on Replit
+
+## Project Overview
+Create a mobile-first, interactive web application for event visitors to experience "NicoWell" - a personalized wellness advice platform. The demo should take 3-5 minutes to complete, showcasing AI-powered personalized wellness recommendations with an emphasis on gentle guidance and sustainable habit formation.
+
+## Core Application Flow
+1. **Welcome Screen**: Brand introduction with start button
+2. **Profile Input**: 5-6 quick profile questions (age, lifestyle, sleep patterns, exercise habits, wellness goals, concerns)
+3. **AI Analysis**: Loading animation while generating personalized insights
+4. **Personalized Plan**: Display analysis results with targeted recommendations
+5. **Chat Experience**: Demo conversation with the NicoWell AI assistant
+6. **Action Step**: Present one simple, actionable habit to start today
+7. **Closing Survey**: Brief feedback form with optional email capture
+
+## Technical Requirements
+- **Frontend**: HTML, CSS, JavaScript (React or Vue.js recommended for state management)
+- **Backend**: Node.js with Express to handle API requests
+- **AI Integration**: OpenAI API (gpt-4-turbo) for analysis and chat functionality
+- **Mobile-First Design**: Responsive layout optimized for tablets (event iPads)
+- **No Database Required**: Session-only data with no permanent storage
+- **No User Authentication**: Focus on instant experience without login
+
+## Design Guidelines
+- Warm, friendly interface with pastel colors
+- Soft, readable typography
+- Hand-drawn style icons and illustrations 
+- Gentle animations for transitions
+- Smile/leaf/wellness iconography
+- Simple tap/swipe interactions only
+
+## Key Components to Develop
+
+### 1. Profile Questionnaire Component
+```
+- Simple form with multiple-choice questions
+- One question per screen with smooth transitions
+- Progress indicator
+- Inputs:
+  * Age range
+  * Lifestyle pattern (desk-focused, active, irregular)
+  * Average sleep duration
+  * Exercise frequency
+  * Wellness goals (multiple selection)
+  * Health concerns (multiple selection)
+```
+
+### 2. AI Analysis Engine
+```
+- OpenAI API integration
+- Prompt engineering to generate:
+  * One key health focus area based on inputs
+  * Personalized recommendations
+  * Conversational responses
+- Response formatting and parsing
+```
+
+### 3. Results Display Component
+```
+- Clear visualization of analysis
+- Friendly, encouraging language
+- Actionable recommendations
+- Visual elements to highlight key points
+```
+
+### 4. Chat Interface Component
+```
+- Simple chat UI resembling messaging apps
+- Pre-populated question suggestions
+- AI response display with proper formatting
+- Limited to 2-3 exchanges for demo purposes
+```
+
+### 5. Action Recommendation Component
+```
+- Single, prominent display of one recommended action
+- Simple, achievable suggestion
+- Positive framing and encouragement
+- Visual reinforcement of the suggestion
+```
+
+## API Integration Instructions
+
+### OpenAI API Setup
+1. Import the OpenAI library
+2. Configure with API key (use Replit Secrets for secure storage)
+3. Create analysis function:
+   ```javascript
+   async function generateAnalysis(userProfile) {
+     // Format user data for the AI
+     // Call OpenAI with appropriate system prompt
+     // Parse and return structured recommendations
+   }
+   ```
+
+### Example System Prompt for Analysis
+```
+You are NicoWell, a friendly wellness assistant focused on gentle, sustainable habit recommendations. Based on the following user profile, identify ONE key area to focus on (sleep, nutrition, stress, or movement). Then provide ONE specific, easy-to-implement recommendation that feels personalized to their situation. Your tone should be warm, supportive, and optimistic. Avoid medical advice or complex suggestions. Focus on simple actions the user can start today.
+
+User profile:
+{userProfileJSON}
+
+Response format:
+{
+  "focusArea": "sleep|nutrition|stress|movement",
+  "insightSummary": "2-3 sentence explanation of why this area matters for them specifically",
+  "recommendedAction": "One specific, easy action stated in 1-2 sentences",
+  "benefitExplanation": "1-2 sentences explaining the benefits"
+}
+```
+
+## User Interface Specifications
+
+### Welcome Screen
+- Logo (centered, 40% screen width)
+- Tagline: "Discover your personalized wellness journey"
+- Start button (prominent, bottom center)
+- Brief explanation (2-3 sentences max)
+
+### Question Screens
+- One question per screen
+- Large, readable text
+- Multiple-choice buttons (full width, easy tap targets)
+- Progress indicator (top)
+- Next/Back navigation (bottom)
+
+### Loading Screen
+- Gentle animation (pulsing leaf or smile icon)
+- Text: "Creating your personalized wellness plan..."
+- Progress indicator or typing animation
+
+### Results Screen
+- Section 1: "Your NicoPlan" with focus area highlight
+- Section 2: Brief analysis with personalized insights
+- Section 3: Recommended action with icon
+- Continue button to chat experience
+
+### Chat Experience
+- Simple message bubbles
+- Assistant avatar (NicoWell logo/icon)
+- 3-4 preset questions user can tap to ask
+- Limited to 2-3 exchanges
+
+### Action Step Screen
+- Large action title: "Your NicoAction for Today"
+- Simple, boxed recommendation with icon
+- Visual reinforcement (illustration or icon)
+- Continue button to survey
+
+### Survey Screen
+- "Help us improve" heading
+- 1-2 quick multiple-choice questions on experience
+- Optional email field
+- Thank you message and close button
+
+## Implementation Plan
+
+### Phase 1: Basic Structure
+1. Set up Replit project with HTML/CSS/JS foundation
+2. Create page routing/navigation system
+3. Design basic UI components and layout
+4. Implement the question flow with state management
+
+### Phase 2: AI Integration
+1. Set up OpenAI API connection
+2. Create prompt templates for analysis and chat
+3. Implement response handling and formatting
+4. Add loading states and error handling
+
+### Phase 3: UI Refinement
+1. Add animations and transitions
+2. Improve visual design elements
+3. Optimize for mobile experience
+4. Implement accessibility features
+
+### Phase 4: Testing & Optimization
+1. Test full user flow
+2. Optimize performance for quick loading
+3. Add fallback options if API fails
+4. Ensure smooth experience on target devices (iPads)
+
+## Code Example: Core Application Structure
+
+```javascript
+// App structure example (using React-like pseudo-code)
+
+// Main application component
+function NicoWellApp() {
+  const [currentScreen, setCurrentScreen] = useState('welcome');
+  const [userProfile, setUserProfile] = useState({});
+  const [analysisResults, setAnalysisResults] = useState(null);
+  
+  // Handle screen navigation
+  const navigateTo = (screen) => {
+    setCurrentScreen(screen);
+  }
+  
+  // Save user responses
+  const handleProfileUpdate = (questionId, answer) => {
+    setUserProfile({
+      ...userProfile,
+      [questionId]: answer
+    });
+  }
+  
+  // Generate analysis from profile
+  const generateAnalysis = async () => {
+    setCurrentScreen('loading');
+    try {
+      const results = await callOpenAIAnalysis(userProfile);
+      setAnalysisResults(results);
+      setCurrentScreen('results');
+    } catch (error) {
+      // Handle error state
+      setCurrentScreen('error');
+    }
+  }
+  
+  // Render appropriate screen
+  return (
+    <div className="nico-app">
+      {currentScreen === 'welcome' && (
+        <WelcomeScreen onStart={() => navigateTo('question1')} />
+      )}
+      {currentScreen === 'question1' && (
+        <QuestionScreen
+          question="What's your age range?"
+          options={['18-25', '26-35', '36-45', '46-55', '56+']}
+          onAnswer={(answer) => {
+            handleProfileUpdate('ageRange', answer);
+            navigateTo('question2');
+          }}
+        />
+      )}
+      {/* Additional question screens would follow */}
+      {currentScreen === 'loading' && (
+        <LoadingScreen message="Creating your personalized wellness plan..." />
+      )}
+      {currentScreen === 'results' && (
+        <ResultsScreen 
+          results={analysisResults}
+          onContinue={() => navigateTo('chat')}
+        />
+      )}
+      {currentScreen === 'chat' && (
+        <ChatScreen
+          userProfile={userProfile}
+          onComplete={() => navigateTo('action')}
+        />
+      )}
+      {currentScreen === 'action' && (
+        <ActionScreen
+          action={analysisResults.recommendedAction}
+          onContinue={() => navigateTo('survey')}
+        />
+      )}
+      {currentScreen === 'survey' && (
+        <SurveyScreen
+          onSubmit={(feedback) => {
+            // Handle feedback submission
+            navigateTo('thank-you');
+          }}
+        />
+      )}
+      {currentScreen === 'thank-you' && (
+        <ThankYouScreen onRestart={() => {
+          // Reset state and start over
+          setUserProfile({});
+          setAnalysisResults(null);
+          navigateTo('welcome');
+        }} />
+      )}
+    </div>
+  );
+}
+```
+
+## Testing Guidelines
+1. Test on actual iPad devices (primary event hardware)
+2. Verify completion time (3-5 minutes target)
+3. Test with limited internet connectivity
+4. Confirm no data persistence between sessions
+5. Validate AI response quality and relevance
+
+## Final Notes
+- Focus on seamless user experience over complex features
+- Prioritize quick loading and responsive design
+- Keep text brief and friendly throughout
+- Ensure AI responses feel personalized but avoid overly specific health claims
+- Include a simple disclaimer about non-medical nature of recommendations
