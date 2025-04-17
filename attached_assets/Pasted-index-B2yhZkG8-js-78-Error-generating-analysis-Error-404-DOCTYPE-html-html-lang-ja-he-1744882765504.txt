@@ -1,0 +1,141 @@
+index-B2yhZkG8.js:78 Error generating analysis: Error: 404: <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <style data-vite-theme="" data-inject-first="">:root {
+      --background: 0 0% 100%;
+--foreground: 20 14.3% 4.1%;
+--muted: 60 4.8% 95.9%;
+--muted-foreground: 25 5.3% 44.7%;
+--popover: 0 0% 100%;
+--popover-foreground: 20 14.3% 4.1%;
+--card: 0 0% 100%;
+--card-foreground: 20 14.3% 4.1%;
+--border: 20 5.9% 90%;
+--input: 20 5.9% 90%;
+--primary: 195 58% 76%;
+--primary-foreground: 195 25% 13%;
+--secondary: 60 4.8% 95.9%;
+--secondary-foreground: 24 9.8% 10%;
+--accent: 60 4.8% 95.9%;
+--accent-foreground: 24 9.8% 10%;
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 60 9.1% 97.8%;
+--ring: 20 14.3% 4.1%;
+--radius: 0.5rem;
+  }
+  .dark {
+      --background: 240 10% 3.9%;
+--foreground: 0 0% 98%;
+--muted: 240 3.7% 15.9%;
+--muted-foreground: 240 5% 64.9%;
+--popover: 240 10% 3.9%;
+--popover-foreground: 0 0% 98%;
+--card: 240 10% 3.9%;
+--card-foreground: 0 0% 98%;
+--border: 240 3.7% 15.9%;
+--input: 240 3.7% 15.9%;
+--primary: 195 58% 76%;
+--primary-foreground: 195 25% 13%;
+--secondary: 240 3.7% 15.9%;
+--secondary-foreground: 0 0% 98%;
+--accent: 240 3.7% 15.9%;
+--accent-foreground: 0 0% 98%;
+--destructive: 0 62.8% 30.6%;
+--destructive-foreground: 0 0% 98%;
+--ring: 240 4.9% 83.9%;
+--radius: 0.5rem;
+  }</style>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>NicoWell - パーソナライズされたウェルネスアドバイス</title>
+    <meta name="description" content="ウェルネス習慣の改善に役立つパーソナライズされたアドバイスを提供するアプリ" />
+    <script type="module" crossorigin src="/assets/index-B2yhZkG8.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DeoEYPlx.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
+</html>
+    at Dm (index-B2yhZkG8.js:48:29947)
+    at async Oc (index-B2yhZkG8.js:48:30148)
+    at async Kx (index-B2yhZkG8.js:78:24893)
+    at async u (index-B2yhZkG8.js:78:25635)
+Kx	@	index-B2yhZkG8.js:78
+await in Kx		
+u	@	index-B2yhZkG8.js:78
+(anonymous)	@	index-B2yhZkG8.js:94
+ot	@	index-B2yhZkG8.js:86
+n.render	@	index-B2yhZkG8.js:86
+n.render	@	index-B2yhZkG8.js:86
+Fy	@	index-B2yhZkG8.js:86
+e.updateRoot	@	index-B2yhZkG8.js:86
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+requestAnimationFrame		
+h	@	index-B2yhZkG8.js:86
+index-B2yhZkG8.js:78 Error generating analysis: Error: 分析の生成中にエラーが発生しました。もう一度お試しください。
+    at Kx (index-B2yhZkG8.js:78:25011)
+    at async u (index-B2yhZkG8.js:78:25635)
+﻿
