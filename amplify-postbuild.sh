@@ -14,26 +14,11 @@ fi
 
 # index.htmlが存在するか確認
 if [ ! -f "dist/public/index.html" ]; then
-  echo "Warning: index.html not found in dist/public directory. Copying from client/ folder..."
-  # クライアントのindex.htmlをdistにコピー
-  if [ -f "client/index.html" ]; then
-    mkdir -p dist/public
-    cp client/index.html dist/public/
-    echo "index.html copied successfully."
-  else
-    echo "Error: client/index.html not found"
-  fi
+  echo "Warning: index.html not found in dist/public directory."
 fi
 
-# サーバーコードをビルド
-echo "Building server code..."
-mkdir -p dist/server
-npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/server
-cp Procfile dist/server/
-
-# サーバーディレクトリにパッケージファイルをコピー
-cp package.json dist/server/
-cp package-lock.json dist/server/
+# Procfileをdistディレクトリにコピー
+cp Procfile dist/
 
 echo "Setting up environment for production..."
 echo "Post-build tasks completed."
