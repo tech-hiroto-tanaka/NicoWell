@@ -1,4 +1,5 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import config from "./config";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -7,12 +8,25 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+// APIのベースURLを取得
+function getApiUrl(path: string): string {
+  const baseUrl = config.apiBaseUrl;
+  // パスが既に完全なURLなら、そのまま返す
+  if (path.startsWith('http')) return path;
+  // ベースURLがあれば結合、なければ相対パスのまま
+  return baseUrl ? `${baseUrl}${path}` : path;
+}
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  // 完全なURLを生成
+  const fullUrl = getApiUrl(url);
+  console.log(`API Request to: ${fullUrl}`);
+  
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
@@ -29,7 +43,11 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    // クエリキーから完全なURLを生成
+    const fullUrl = getApiUrl(queryKey[0] as string);
+    console.log(`Query Request to: ${fullUrl}`);
+    
+    const res = await fetch(fullUrl, {
       credentials: "include",
     });
 

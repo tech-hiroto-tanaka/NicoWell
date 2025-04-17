@@ -1,5 +1,5 @@
 version: 1
-# 単一のアプリケーションとして扱うよう設定
+# フロントエンドのみをデプロイ
 frontend:
   phases:
     preBuild:
@@ -9,8 +9,10 @@ frontend:
       commands:
         - npm run build
         - bash ./amplify-postbuild.sh
+        # 環境変数をフロントエンドに注入
+        - echo "VITE_API_BASE_URL=$API_ENDPOINT" >> .env.production
   artifacts:
-    baseDirectory: ./dist
+    baseDirectory: ./dist/public
     files:
       - '**/*'
   cache:
@@ -23,11 +25,7 @@ frontend:
         - key: 'Cache-Control'
           value: 'public, max-age=0, must-revalidate'
   customRules:
-    # APIリクエストを処理するためのリダイレクト
-    - pattern: '/api/*'
-      target: '/api/:splat'
-      status: '200'
-    # その他のルートはSPAとして処理
+    # その他のルートはSPAとして処理（APIリクエストは別サービスへ）
     - pattern: '**/*'
       target: '/index.html'
       status: '200'
