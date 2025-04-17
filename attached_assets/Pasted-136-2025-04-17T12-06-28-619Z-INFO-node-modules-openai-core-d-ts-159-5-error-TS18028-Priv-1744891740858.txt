@@ -1,0 +1,151 @@
+136
+
+2025-04-17T12:06:28.619Z [INFO]: ../node_modules/openai/core.d.ts(159,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+137
+
+2025-04-17T12:06:28.625Z [INFO]: ../node_modules/openai/lib/AbstractChatCompletionRunner.d.ts(15,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+138
+
+                                 ../node_modules/openai/lib/AssistantStream.d.ts(37,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+139
+
+                                 ../node_modules/openai/lib/ChatCompletionStream.d.ts(68,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+140
+
+                                 ../node_modules/openai/lib/EventStream.d.ts(4,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+141
+
+                                 ../node_modules/openai/lib/responses/ResponseStream.d.ts(22,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+
+142
+
+2025-04-17T12:06:28.648Z [INFO]: TypeScript compilation failed
+
+143
+
+2025-04-17T12:06:34.135Z [INFO]: Backend build completed successfully!
+
+144
+
+2025-04-17T12:06:34.140Z [INFO]: # Executing command: echo "Amplify backend deployment status:"
+
+145
+
+                                 Amplify backend deployment status:
+
+146
+
+                                 # Executing command: npx ampx pipeline-deploy --yes
+
+147
+
+2025-04-17T12:06:37.879Z [INFO]: 
+
+148
+
+2025-04-17T12:06:37.884Z [INFO]: Error: Missing required arguments: branch, app-id
+
+149
+
+2025-04-17T12:06:37.885Z [WARNING]: ampx pipeline-deploy
+
+150
+
+                                    Command to deploy backends in a custom CI/CD pipeline. This command is not inten
+
+151
+
+                                    ded to be used locally.
+
+152
+
+                                    Options:
+
+153
+
+                                    --debug            Print debug logs to the console
+
+154
+
+                                    [boolean] [default: false]
+
+155
+
+                                    --branch           Name of the git branch being deployed
+
+156
+
+                                    [string] [required]
+
+157
+
+                                    --app-id           The app id of the target Amplify app[string] [required]
+
+158
+
+                                    --outputs-out-dir  A path to directory where amplify_outputs is written. I
+
+159
+
+                                    f not provided defaults to current process working dire
+
+160
+
+                                    ctory.                                         [string]
+
+161
+
+                                    --outputs-version  Version of the configuration. Version 0 represents clas
+
+162
+
+                                    sic amplify-cli config file amplify-configuration and 1
+
+163
+
+                                    represents newer config file amplify_outputs
+
+164
+
+                                    [string] [choices: "0", "1", "1.1", "1.2", "1.3"] [default: "1.3"]
+
+165
+
+                                    --outputs-format   amplify_outputs file format
+
+166
+
+                                    [string] [choices: "mjs", "json", "json-mobile", "ts", "dart"]
+
+167
+
+                                    -h, --help             Show help                                     [boolean]
+
+168
+
+2025-04-17T12:06:38.007Z [ERROR]: !!! Build failed
+
+169
+
+2025-04-17T12:06:38.007Z [ERROR]: !!! Error: Command failed with exit code 1
+
+170
+
+2025-04-17T12:06:38.007Z [INFO]: # Starting environment caching...
+
+171
+
+2025-04-17T12:06:38.008Z [INFO]: # Uploading environment cache artifact...
+
+172
+
+2025-04-17T12:06:38.077Z [INFO]: # Uploaded environment cache artifact
+
+173
+
+2025-04-17T12:06:38.077Z [INFO]: # Environment caching completed

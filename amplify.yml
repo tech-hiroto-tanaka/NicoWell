@@ -13,7 +13,9 @@ backend:
         - echo "Deploying backend resources..."
         - bash ./amplify/build-backend.sh
         - echo "Amplify backend deployment status:"
-        - npx ampx pipeline-deploy --yes
+        - export AMPLIFY_APP_ID=dsqkbl4wlhcb2
+        - export AMPLIFY_BRANCH=main
+        - npx ampx pipeline-deploy --yes --app-id $AMPLIFY_APP_ID --branch $AMPLIFY_BRANCH
 frontend:
   phases:
     preBuild:

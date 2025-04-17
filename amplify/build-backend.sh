@@ -34,11 +34,11 @@ cp ../survey-function/handler.ts ./survey-function/
 # TypeScriptファイルをJavaScriptにコンパイル
 echo "Compiling TypeScript to JavaScript..."
 cd analysis-function
-tsc --allowJs --outDir . ../analysis-function/handler.ts || echo "TypeScript compilation failed"
+tsc --allowJs --target ES2015 --outDir . ../analysis-function/handler.ts || echo "TypeScript compilation failed"
 cd ../chat-function
-tsc --allowJs --outDir . ../chat-function/handler.ts || echo "TypeScript compilation failed"
+tsc --allowJs --target ES2015 --outDir . ../chat-function/handler.ts || echo "TypeScript compilation failed"
 cd ../survey-function
-tsc --allowJs --outDir . ../survey-function/handler.ts || echo "TypeScript compilation failed"
+tsc --allowJs --target ES2015 --outDir . ../survey-function/handler.ts || echo "TypeScript compilation failed"
 cd ../..
 
 echo "Backend build completed successfully!"
