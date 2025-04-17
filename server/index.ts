@@ -1,8 +1,20 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from 'cors';
 
 const app = express();
+
+// CORSミドルウェアを追加して異なるドメインからのリクエストを許可
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? [/\.amplifyapp\.com$/, /\.replit\.app$/] // 本番環境ではAmplifyとReplitドメインのみ許可
+    : '*', // 開発環境ではすべて許可
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
