@@ -9,7 +9,7 @@ frontend:
         - npm run build
         - bash ./amplify-postbuild.sh
   artifacts:
-    baseDirectory: dist
+    baseDirectory: ./dist
     files:
       - '**/*'
   cache:
@@ -21,3 +21,8 @@ frontend:
       headers:
         - key: 'Cache-Control'
           value: 'public, max-age=0, must-revalidate'
+  customRules:
+    - pattern: '**/*'
+      target: '/index.html'
+      status: '200'
+      condition: 'isPage'
