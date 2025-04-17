@@ -13,27 +13,34 @@ cd "$(dirname "$0")"
 echo "依存関係をインストールしています..."
 npm install
 
-# 分析関数のデプロイパッケージを作成
-echo "分析関数のデプロイパッケージを作成しています..."
-cd analysis-function
-zip -r ../analysis-function.zip ../node_modules index.js
-cd ..
+# ZIP機能がない場合は手動でファイルをコピーする
+echo "デプロイ用のディレクトリを作成しています..."
 
-# チャット関数のデプロイパッケージを作成
-echo "チャット関数のデプロイパッケージを作成しています..."
-cd chat-function
-zip -r ../chat-function.zip ../node_modules index.js
-cd ..
+# 分析関数のデプロイディレクトリ作成
+echo "分析関数のデプロイディレクトリを作成しています..."
+mkdir -p deploy-packages/analysis-function/node_modules
+cp -r analysis-function/index.js deploy-packages/analysis-function/
+cp -r node_modules/* deploy-packages/analysis-function/node_modules/
 
-# アンケート関数のデプロイパッケージを作成
-echo "アンケート関数のデプロイパッケージを作成しています..."
-cd survey-function
-zip -r ../survey-function.zip ../node_modules index.js
-cd ..
+# チャット関数のデプロイディレクトリを作成
+echo "チャット関数のデプロイディレクトリを作成しています..."
+mkdir -p deploy-packages/chat-function/node_modules
+cp -r chat-function/index.js deploy-packages/chat-function/
+cp -r node_modules/* deploy-packages/chat-function/node_modules/
+
+# アンケート関数のデプロイディレクトリを作成
+echo "アンケート関数のデプロイディレクトリを作成しています..."
+mkdir -p deploy-packages/survey-function/node_modules
+cp -r survey-function/index.js deploy-packages/survey-function/
+cp -r node_modules/* deploy-packages/survey-function/node_modules/
 
 echo "デプロイパッケージの作成が完了しました。"
-echo "以下のファイルが生成されました："
-ls -la *.zip
+echo "以下のディレクトリが生成されました："
+ls -la deploy-packages/
+
+echo ""
+echo "注意: zipコマンドが利用できなかったため、ZIPファイルは作成されませんでした。"
+echo "各関数のデプロイには deploy-packages/ 内の各ディレクトリをZIPファイルに圧縮して利用してください。"
 
 # 元のディレクトリに戻る
 cd "$CURRENT_DIR"
