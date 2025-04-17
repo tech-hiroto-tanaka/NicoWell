@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNicoWell } from "@/hooks/use-nicowell-state";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { submitSurveyResponse } from "@/lib/openai";
 
 export default function SurveyScreen() {
   const { navigateTo, userProfile, analysisResults } = useNicoWell();
@@ -24,13 +24,29 @@ export default function SurveyScreen() {
     setIsSubmitting(true);
 
     try {
-      await apiRequest("POST", "/api/survey", {
-        satisfaction,
-        feasibility,
-        email: email || null,
+      // 文字列を数値に変換するマッピング
+      const satisfactionMap: Record<string, number> = {
+        "very-good": 5,
+        "good": 4,
+        "neutral": 3,
+        "bad": 2,
+      };
+      
+      const feasibilityMap: Record<string, number> = {
+        "very-feasible": 5,
+        "feasible": 4,
+        "neutral": 3,
+        "difficult": 2,
+      };
+
+      // Lambda関数を呼び出し
+      await submitSurveyResponse(
+        satisfactionMap[satisfaction] || 3,
+        feasibilityMap[feasibility] || 3,
+        email || undefined,
         userProfile,
-        analysisResults,
-      });
+        analysisResults || undefined
+      );
 
       toast({
         title: "送信完了",
