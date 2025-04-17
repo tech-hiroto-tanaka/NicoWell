@@ -89,9 +89,9 @@ export default function ResultsScreen() {
         </p>
       </div>
       
-      <div ref={actionBoxRef} className="bg-white rounded-lg p-5 shadow-md mb-6 overflow-hidden">
+      <div ref={actionBoxRef} className="bg-accent/30 rounded-lg p-5 shadow-md mb-6 overflow-hidden">
         <div className="flex items-start mb-4">
-          <div className="w-16 h-16 bg-accent/30 rounded-lg mr-3 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-lg mr-3 flex items-center justify-center">
             <span className="material-icons-round text-accent text-3xl animate-icon">
               {analysisResults.focusArea === "sleep" ? "bedtime" : 
                analysisResults.focusArea === "nutrition" ? "restaurant" :
