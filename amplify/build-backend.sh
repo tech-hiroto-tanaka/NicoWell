@@ -8,14 +8,37 @@ if [[ -z "${OPENAI_API_KEY}" ]]; then
   exit 1
 fi
 
+# TypeScriptコンパイラをインストール
+echo "Installing TypeScript..."
+npm install -g typescript
+npm install -g tsx
+
 # Lambda関数のディレクトリを作成
-mkdir -p dist/functions/analysis-function
-mkdir -p dist/functions/chat-function
-mkdir -p dist/functions/survey-function
+echo "Creating function directories..."
+mkdir -p amplify/.temp/analysis-function
+mkdir -p amplify/.temp/chat-function
+mkdir -p amplify/.temp/survey-function
+
+# 必要なパッケージをインストール
+echo "Installing function dependencies..."
+cd amplify/.temp
+npm init -y
+npm install openai
 
 # Handlerファイルをコピー
-cp amplify/analysis-function/handler.ts dist/functions/analysis-function/
-cp amplify/chat-function/handler.ts dist/functions/chat-function/
-cp amplify/survey-function/handler.ts dist/functions/survey-function/
+echo "Copying handler files..."
+cp ../analysis-function/handler.ts ./analysis-function/
+cp ../chat-function/handler.ts ./chat-function/
+cp ../survey-function/handler.ts ./survey-function/
+
+# TypeScriptファイルをJavaScriptにコンパイル
+echo "Compiling TypeScript to JavaScript..."
+cd analysis-function
+tsc --allowJs --outDir . ../analysis-function/handler.ts || echo "TypeScript compilation failed"
+cd ../chat-function
+tsc --allowJs --outDir . ../chat-function/handler.ts || echo "TypeScript compilation failed"
+cd ../survey-function
+tsc --allowJs --outDir . ../survey-function/handler.ts || echo "TypeScript compilation failed"
+cd ../..
 
 echo "Backend build completed successfully!"

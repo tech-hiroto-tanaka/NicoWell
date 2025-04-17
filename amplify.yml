@@ -1,10 +1,18 @@
 version: 1
 backend:
   phases:
+    preBuild:
+      commands:
+        - npm ci
     build:
       commands:
-        - '# Run backend build script'
+        - echo "Installing Amplify CLI..."
+        - npm install -g ampx
+        - npm install -g @aws-amplify/backend
+        - echo "Deploying backend resources..."
         - bash ./amplify/build-backend.sh
+        - echo "Amplify backend deployment status:"
+        - npx ampx pipeline-deploy --yes
 frontend:
   phases:
     preBuild:
