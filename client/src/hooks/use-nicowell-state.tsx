@@ -53,13 +53,21 @@ export function NicoWellProvider({ children }: { children: ReactNode }) {
 
   const generateAnalysisFromAPI = async () => {
     try {
+      navigateTo("loading");
       const results = await generateAnalysis(userProfile);
       setAnalysisResults(results);
       navigateTo("results");
     } catch (error) {
       console.error("Error generating analysis:", error);
-      // Handle error case - could navigate to an error screen or back to questions
-      navigateTo("question1");
+      // エラーの場合はロード画面からresultsに移動し、エラーメッセージを表示
+      const fallbackResult = {
+        focusArea: "stress" as const,
+        insightSummary: "申し訳ありませんが、分析中にエラーが発生しました。もう一度お試しください。",
+        recommendedAction: "分析を再試行するか、サポートにお問い合わせください。",
+        benefitExplanation: "技術的な問題が発生したようです。",
+      };
+      setAnalysisResults(fallbackResult);
+      navigateTo("results");
     }
   };
 

@@ -178,7 +178,8 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
       if (questionNumber < questions.length) {
         navigateTo(`question${questionNumber + 1}` as any);
       } else {
-        navigateTo("loading");
+        // 最後の質問の後はgenerateAnalysisのみを呼び出し
+        // (generateAnalysis関数内で"loading"画面に遷移するように修正済み)
         generateAnalysis();
       }
     });
