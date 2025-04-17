@@ -42,7 +42,6 @@ export default function ActionScreen() {
         <div className="w-24 h-24 mx-auto mb-4 bg-white rounded-full flex items-center justify-center">
           <span className="material-icons-round text-accent text-5xl">{actionIcon}</span>
         </div>
-        <h3 className="font-rounded font-bold text-xl mb-3">{actionTitle}</h3>
         <p className="text-foreground">
           {analysisResults.recommendedAction}
         </p>

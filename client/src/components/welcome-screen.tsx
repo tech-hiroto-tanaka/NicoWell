@@ -1,4 +1,5 @@
 import { useNicoWell } from "@/hooks/use-nicowell-state";
+import nicoWellLogo from "@assets/logo-NicoWell-whitebg.png";
 
 export default function WelcomeScreen() {
   const { navigateTo } = useNicoWell();
@@ -7,8 +8,8 @@ export default function WelcomeScreen() {
     <section className="flex flex-col items-center justify-between min-h-screen p-6">
       <div className="w-full"></div>
       <div className="flex flex-col items-center text-center">
-        <div className="w-40 h-40 rounded-full bg-primary/30 mb-6 flex items-center justify-center">
-          <span className="material-icons-round text-primary-foreground text-6xl">spa</span>
+        <div className="w-40 h-40 mb-6 flex items-center justify-center">
+          <img src={nicoWellLogo} alt="NicoWell Logo" className="w-full h-full object-contain" />
         </div>
         <h1 className="font-rounded font-bold text-3xl mb-3 text-primary">NicoWell</h1>
         <p className="font-rounded text-xl mb-8">パーソナライズされたウェルネスの旅を発見しよう</p>
