@@ -7,6 +7,7 @@ frontend:
     build:
       commands:
         - npm run build
+        - bash ./amplify-postbuild.sh
   artifacts:
     baseDirectory: dist
     files:
@@ -14,3 +15,9 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+      - .npm/**/*
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'public, max-age=0, must-revalidate'

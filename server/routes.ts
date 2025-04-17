@@ -44,7 +44,8 @@ ${userProfileJSON}
       });
       
       // Parse the response JSON
-      const analysisResult = JSON.parse(response.choices[0].message.content);
+      const content = response.choices[0].message.content || '{}';
+      const analysisResult = JSON.parse(content);
       
       res.json(analysisResult);
     } catch (error) {
@@ -88,7 +89,7 @@ ${analysisResultJSON}
       });
       
       // Get the response text
-      const chatResponse = response.choices[0].message.content;
+      const chatResponse = response.choices[0].message.content || "申し訳ありませんが、回答を生成できませんでした。もう一度お試しください。";
       
       res.json({ response: chatResponse });
     } catch (error) {
