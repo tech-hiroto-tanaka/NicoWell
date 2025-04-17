@@ -44,8 +44,7 @@ ${userProfileJSON}
       });
       
       // Parse the response JSON
-      const content = response.choices[0].message.content || '{}';
-      const analysisResult = JSON.parse(content);
+      const analysisResult = JSON.parse(response.choices[0].message.content);
       
       res.json(analysisResult);
     } catch (error) {
@@ -89,7 +88,7 @@ ${analysisResultJSON}
       });
       
       // Get the response text
-      const chatResponse = response.choices[0].message.content || '';
+      const chatResponse = response.choices[0].message.content;
       
       res.json({ response: chatResponse });
     } catch (error) {
