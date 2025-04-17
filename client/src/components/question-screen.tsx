@@ -1,6 +1,8 @@
 import { Progress } from "@/components/ui/progress";
 import { useNicoWell } from "@/hooks/use-nicowell-state";
+import { useQuestionAnimation } from "@/hooks/use-gsap-animation";
 import { useEffect, useState } from "react";
+import gsap from "gsap";
 
 interface QuestionOption {
   id: string;
@@ -15,6 +17,7 @@ interface QuestionScreenProps {
 export default function QuestionScreen({ questionNumber }: QuestionScreenProps) {
   const { userProfile, updateUserProfile, navigateTo, generateAnalysis } = useNicoWell();
   const [selected, setSelected] = useState<string[] | string>([]);
+  const { questionTitleRef, optionsContainerRef, buttonsContainerRef } = useQuestionAnimation();
 
   // Define questions data
   const questions = [
@@ -92,6 +95,18 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
   const currentQuestion = questions[questionNumber - 1];
   const progressPercent = (questionNumber / questions.length) * 100;
   
+  // プログレスバーのアニメーション
+  useEffect(() => {
+    gsap.fromTo(".progress-bar-fill", 
+      { width: 0 }, 
+      { 
+        width: `${progressPercent}%`, 
+        duration: 0.8, 
+        ease: "power1.out" 
+      }
+    );
+  }, [progressPercent]);
+  
   // Initialize selected value(s) from userProfile
   useEffect(() => {
     const fieldName = currentQuestion.fieldName as keyof typeof userProfile;
@@ -105,8 +120,20 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
     }
   }, [currentQuestion.fieldName, questionNumber, userProfile]);
 
+  // オプション選択時のアニメーション
+  const animateOptionSelection = (labelElement: HTMLElement) => {
+    gsap.fromTo(labelElement,
+      { scale: 0.98 },
+      { scale: 1, duration: 0.3, ease: "elastic.out(1, 0.5)" }
+    );
+  };
+
   // Handle option selection
-  const handleOptionChange = (value: string) => {
+  const handleOptionChange = (value: string, event: React.MouseEvent<HTMLLabelElement>) => {
+    // 選択アニメーション
+    const labelElement = event.currentTarget;
+    animateOptionSelection(labelElement);
+    
     if (currentQuestion.type === "checkbox") {
       const currentSelected = selected as string[];
       
@@ -126,25 +153,45 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
     }
   };
 
+  // ナビゲーションアニメーション
+  const animateTransition = (direction: 'next' | 'prev', callback: () => void) => {
+    const container = document.querySelector('section');
+    if (!container) {
+      callback();
+      return;
+    }
+    
+    gsap.to(container, { 
+      opacity: 0, 
+      x: direction === 'next' ? -20 : 20, 
+      duration: 0.3,
+      onComplete: callback
+    });
+  };
+
   // Navigation handlers
   const handleNext = () => {
     const fieldName = currentQuestion.fieldName as keyof typeof userProfile;
     updateUserProfile({ [fieldName]: selected });
     
-    if (questionNumber < questions.length) {
-      navigateTo(`question${questionNumber + 1}`);
-    } else {
-      navigateTo("loading");
-      generateAnalysis();
-    }
+    animateTransition('next', () => {
+      if (questionNumber < questions.length) {
+        navigateTo(`question${questionNumber + 1}` as any);
+      } else {
+        navigateTo("loading");
+        generateAnalysis();
+      }
+    });
   };
 
   const handleBack = () => {
-    if (questionNumber > 1) {
-      navigateTo(`question${questionNumber - 1}`);
-    } else {
-      navigateTo("welcome");
-    }
+    animateTransition('prev', () => {
+      if (questionNumber > 1) {
+        navigateTo(`question${questionNumber - 1}` as any);
+      } else {
+        navigateTo("welcome");
+      }
+    });
   };
 
   // Determine if next button should be enabled
@@ -155,16 +202,18 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
   return (
     <section className="flex flex-col min-h-screen p-6">
       <div className="mb-6">
-        <Progress value={progressPercent} className="h-2 bg-primary/20" />
+        <div className="h-2 bg-primary/20 rounded-full overflow-hidden">
+          <div className="progress-bar-fill h-full bg-primary rounded-full"></div>
+        </div>
         <div className="flex justify-between text-xs text-muted-foreground mt-1">
           <span>質問 {questionNumber}/6</span>
           <span>{Math.round(progressPercent)}%</span>
         </div>
       </div>
       
-      <h2 className="font-rounded font-bold text-2xl mb-8 mt-4">{currentQuestion.title}</h2>
+      <h2 ref={questionTitleRef} className="font-rounded font-bold text-2xl mb-8 mt-4">{currentQuestion.title}</h2>
       
-      <div className="space-y-3 mb-auto">
+      <div ref={optionsContainerRef} className="space-y-3 mb-auto">
         {currentQuestion.options.map((option: QuestionOption) => (
           <div key={option.id} className="option-container">
             <input
@@ -177,12 +226,13 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
                   ? (selected as string[]).includes(option.value)
                   : selected === option.value
               }
-              onChange={() => handleOptionChange(option.value)}
+              onChange={() => {}}
               className="hidden peer"
             />
             <label
               htmlFor={option.id}
               className="block w-full text-center p-4 border-2 border-muted rounded-lg cursor-pointer hover:bg-muted transition-colors peer-checked:bg-accent peer-checked:border-accent-foreground"
+              onClick={(e) => handleOptionChange(option.value, e)}
             >
               {option.label}
             </label>
@@ -190,7 +240,7 @@ export default function QuestionScreen({ questionNumber }: QuestionScreenProps) 
         ))}
       </div>
       
-      <div className="flex justify-between mt-8">
+      <div ref={buttonsContainerRef} className="flex justify-between mt-8">
         {questionNumber > 1 ? (
           <>
             <button
