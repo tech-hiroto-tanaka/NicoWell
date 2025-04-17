@@ -1,0 +1,11 @@
+{
+  "name": "nicowell-lambda-functions",
+  "version": "1.0.0",
+  "description": "NicoWell バックエンドLambda関数",
+  "dependencies": {
+    "openai": "^4.28.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
