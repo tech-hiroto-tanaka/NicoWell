@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: NicoWell バックエンド API - CORS対応版
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs18.x
+    MemorySize: 256
+    Environment:
+      Variables:
+        OPENAI_API_KEY: !Ref OpenAIApiKey
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type,Authorization'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  OpenAIApiKey:
+    Type: String
+    Description: OpenAI APIキー
+    NoEcho: true
+
+Resources:
+  # 分析関数
+  AnalysisFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/analysis-function.zip
+      Handler: index.handler
+      Description: ユーザープロフィールの分析を行う関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: post
+
+  # チャット関数
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/chat-function.zip
+      Handler: index.handler
+      Description: ユーザーとのチャット対応を行う関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /chat
+            Method: post
+
+  # サーベイ関数
+  SurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/survey-function.zip
+      Handler: index.handler
+      Description: ユーザーサーベイを処理する関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /survey
+            Method: post
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway エンドポイントURL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+
+  AnalysisFunction:
+    Description: "分析関数の名前"
+    Value: !Ref AnalysisFunction
+
+  ChatFunction:
+    Description: "チャット関数の名前"
+    Value: !Ref ChatFunction
+
+  SurveyFunction:
+    Description: "サーベイ関数の名前"
+    Value: !Ref SurveyFunction

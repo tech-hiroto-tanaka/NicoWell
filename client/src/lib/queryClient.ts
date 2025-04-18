@@ -30,7 +30,8 @@ export async function apiRequest(
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
+    // credentialsモードを変更（CORSエラー回避）
+    credentials: "omit",
   });
 
   await throwIfResNotOk(res);
@@ -48,7 +49,8 @@ export const getQueryFn: <T>(options: {
     console.log(`Query Request to: ${fullUrl}`);
     
     const res = await fetch(fullUrl, {
-      credentials: "include",
+      // credentialsモードを変更（CORSエラー回避）
+      credentials: "omit",
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
