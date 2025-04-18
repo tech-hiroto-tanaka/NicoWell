@@ -56,7 +56,7 @@ Resources:
   SurveyFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/deploy-packages/survey-function/
+      CodeUri: lambda/deploy-packages/survey-function.zip
       Handler: index.handler
       Description: アンケート回答を処理する関数
       Policies:

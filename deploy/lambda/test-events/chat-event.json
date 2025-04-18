@@ -1,0 +1,4 @@
+{
+  "httpMethod": "POST",
+  "body": "{\"userProfile\":{\"ageRange\":\"30-40\",\"lifestyle\":\"デスクワーク中心の忙しい日々を送っています\",\"sleepDuration\":\"6時間未満\",\"exerciseFrequency\":\"週に1-2回\",\"wellnessGoals\":[\"エネルギー向上\",\"ストレス軽減\",\"集中力向上\"],\"healthConcerns\":[\"睡眠の質\",\"慢性的な疲労\"]},\"analysisResult\":{\"focusArea\":\"sleep\",\"insightSummary\":\"睡眠不足と質の低下がエネルギー不足や集中力低下を引き起こしている。\",\"recommendedAction\":\"寝る前の1時間はスクリーンを控え、リラックスする時間を設けましょう。\",\"benefitExplanation\":\"睡眠の質が向上し、翌日のエネルギーと集中力が改善されます。\"},\"message\":\"睡眠の質を改善するためのアドバイスをください\"}"
+}

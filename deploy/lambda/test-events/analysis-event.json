@@ -1,0 +1,4 @@
+{
+  "httpMethod": "POST",
+  "body": "{\"userProfile\":{\"ageRange\":\"30-40\",\"lifestyle\":\"デスクワーク中心の忙しい日々を送っています\",\"sleepDuration\":\"6時間未満\",\"exerciseFrequency\":\"週に1-2回\",\"wellnessGoals\":[\"エネルギー向上\",\"ストレス軽減\",\"集中力向上\"],\"healthConcerns\":[\"睡眠の質\",\"慢性的な疲労\"]}}"
+}
