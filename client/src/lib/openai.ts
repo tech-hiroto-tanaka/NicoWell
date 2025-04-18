@@ -22,7 +22,7 @@ export async function generateAnalysis(userProfile: UserProfile): Promise<Analys
   try {
     const response = await apiRequest(
       "POST",
-      "/analyze", // Lambda APIのエンドポイント
+      "/analyze", // AWSデプロイしたAPIのパス
       { userProfile }
     );
     
@@ -49,7 +49,7 @@ export async function getChatResponse(
   try {
     const response = await apiRequest(
       "POST", 
-      "/chat", // Lambda APIのエンドポイント
+      "/chat", // AWSデプロイしたAPIのパス
       { userProfile, analysisResult, message }
     );
     
@@ -78,7 +78,7 @@ export async function submitSurveyResponse(
   try {
     const response = await apiRequest(
       "POST",
-      "/survey", // Lambda APIのエンドポイント
+      "/survey", // AWSデプロイしたAPIのパス
       { 
         satisfaction, 
         feasibility, 
