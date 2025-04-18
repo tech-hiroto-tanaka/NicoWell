@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: NicoWell 分析関数 - シンプル版
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs18.x
+    MemorySize: 256
+    Environment:
+      Variables:
+        OPENAI_API_KEY: !Ref OpenAIApiKey
+
+Parameters:
+  OpenAIApiKey:
+    Type: String
+    Description: OpenAI APIキー
+    NoEcho: true
+
+Resources:
+  # 分析関数
+  AnalysisFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/analysis-function.zip
+      Handler: index.handler
+      Description: ユーザープロフィールの分析を行う関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: post
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway エンドポイントURL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/analyze"
+
+  AnalysisFunction:
+    Description: "分析関数の名前"
+    Value: !Ref AnalysisFunction

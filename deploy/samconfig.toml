@@ -3,10 +3,10 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "nicowell-backend"
-s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-${AWS::AccountId}"
+# s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket"
 s3_prefix = "nicowell-backend"
-region = "${env:AWS_REGION}"
+region = "us-east-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
-parameter_overrides = "OpenAIApiKey=\"${env:OPENAI_API_KEY}\""
+disable_rollback = false
 image_repositories = []
