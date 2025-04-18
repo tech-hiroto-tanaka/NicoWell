@@ -1,0 +1,97 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: NicoWell バックエンドサーバーレスアプリケーション
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs18.x
+    MemorySize: 256
+    Environment:
+      Variables:
+        OPENAI_API_KEY: !Ref OpenAIApiKey
+
+Parameters:
+  OpenAIApiKey:
+    Type: String
+    Description: OpenAI APIキー
+    NoEcho: true
+
+Resources:
+  # 分析関数
+  AnalysisFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/analysis-function.zip
+      Handler: index.handler
+      Description: ユーザープロフィールの分析を行う関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: post
+            RestApiId: !Ref NicoWellApi
+
+  # チャット関数
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/chat-function.zip
+      Handler: index.handler
+      Description: ユーザーとのチャット対話を処理する関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /chat
+            Method: post
+            RestApiId: !Ref NicoWellApi
+
+  # アンケート関数
+  SurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/deploy-packages/survey-function/
+      Handler: index.handler
+      Description: アンケート回答を処理する関数
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /survey
+            Method: post
+            RestApiId: !Ref NicoWellApi
+
+  # API Gateway
+  NicoWellApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'POST, OPTIONS'"
+        AllowHeaders: "'Content-Type'"
+        AllowOrigin: "'*'"
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway エンドポイントURL"
+    Value: !Sub "https://${NicoWellApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+
+  AnalysisFunction:
+    Description: "分析関数の名前"
+    Value: !Ref AnalysisFunction
+
+  ChatFunction:
+    Description: "チャット関数の名前"
+    Value: !Ref ChatFunction
+
+  SurveyFunction:
+    Description: "アンケート関数の名前"
+    Value: !Ref SurveyFunction

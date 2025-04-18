@@ -38,9 +38,30 @@ echo "デプロイパッケージの作成が完了しました。"
 echo "以下のディレクトリが生成されました："
 ls -la deploy-packages/
 
-echo ""
-echo "注意: zipコマンドが利用できなかったため、ZIPファイルは作成されませんでした。"
-echo "各関数のデプロイには deploy-packages/ 内の各ディレクトリをZIPファイルに圧縮して利用してください。"
+# zipコマンドがあればZIPファイルを作成
+if command -v zip &> /dev/null; then
+  echo "ZIPファイルを作成しています..."
+  
+  # 各関数のZIPファイルを作成
+  cd deploy-packages/analysis-function/
+  zip -r ../analysis-function.zip .
+  cd ../../
+  
+  cd deploy-packages/chat-function/
+  zip -r ../chat-function.zip .
+  cd ../../
+  
+  cd deploy-packages/survey-function/
+  zip -r ../survey-function.zip .
+  cd ../../
+  
+  echo "ZIPファイルが作成されました："
+  ls -la deploy-packages/*.zip
+else
+  echo ""
+  echo "注意: zipコマンドが利用できないため、ZIPファイルは作成されませんでした。"
+  echo "各関数のデプロイには deploy-packages/ 内の各ディレクトリをZIPファイルに圧縮して利用してください。"
+fi
 
 # 元のディレクトリに戻る
 cd "$CURRENT_DIR"
